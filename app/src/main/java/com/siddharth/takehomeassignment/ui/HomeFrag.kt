@@ -59,7 +59,7 @@ class HomeFrag : Fragment() {
     private fun inflateAdIfNotCancelled() {
 
         val isCancelled = sharedPreferences!!.getBoolean("isAdCancelled", false)
-        if (isCancelled) {
+        if (!isCancelled) {
             val adView = binding.viewStubAd.inflate()
             setupUiForAd(adView)
             setupOnAdCloseListener(adView)
@@ -67,7 +67,6 @@ class HomeFrag : Fragment() {
     }
 
     private fun setupUiForAd(adView: View) {
-        Log.d("HomeFrag","69")
         val ivAd = adView.findViewById<ImageView>(R.id.iv_ad)
         Glide.with(requireContext())
             .load(LANDSCAPE_IMAGE)
