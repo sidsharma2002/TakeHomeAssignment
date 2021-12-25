@@ -3,6 +3,7 @@ package com.siddharth.takehomeassignment.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.siddharth.takehomeassignment.data.user.User
 import com.siddharth.takehomeassignment.repository.HomeRepository
 import com.siddharth.takehomeassignment.utils.Response
@@ -20,7 +21,7 @@ class HomeViewModel : ViewModel() {
         fetchUserList()
     }
 
-    private fun fetchUserList() = CoroutineScope(Dispatchers.Main).launch {
+    private fun fetchUserList() = viewModelScope.launch {
         _userList.postValue(Response.Loading())
         val result = repository.fetchUserData()
         _userList.postValue(result)
